@@ -1,552 +1,698 @@
-<p align="center">
-<h1 align="center">
-AI Stock Sentiment Engine
+<div align="center">
 
-</h1>
-<p align="center">
-<strong>Turning Financial News into Structured Market
-Intelligence</strong>
+# 📈 AI Stock Sentiment Analytics
 
+### **From Financial News → AI Intelligence → Decision-Ready Analytics**
+
+<p>
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/FinBERT-Financial%20NLP-6f42c1">
+  <img src="https://img.shields.io/badge/VADER-Sentiment-orange">
+  <img src="https://img.shields.io/badge/PostgreSQL-Analytics-336791?logo=postgresql&logoColor=white">
+  <img src="https://img.shields.io/badge/SQL-Analytics-4479A1?logo=postgresql&logoColor=white">
+  <img src="https://img.shields.io/badge/Power%20BI-Decision%20Intelligence-F2C811?logo=powerbi&logoColor=black">
+  <img src="https://img.shields.io/badge/Portfolio-Data%20Science-success">
 </p>
-</p>
-<p align="center">
-<img src="https://img.shields.io/badge/Python-3.12-blue?logo=python&logoColor=white">
-<img src="https://img.shields.io/badge/FinBERT-Financial%20NLP-6f42c1">
-<img src="https://img.shields.io/badge/VADER-Sentiment-orange">
-<img src="https://img.shields.io/badge/PostgreSQL-Analytics-336791?logo=postgresql&logoColor=white">
-<img src="https://img.shields.io/badge/Power%20BI-Reporting-F2C811?logo=powerbi&logoColor=black">
-<img src="https://img.shields.io/badge/Portfolio-Data%20Science-success">
 
-</p>
-> **Recruiter-facing portfolio project:** an end-to-end financial-news
-> intelligence platform that collects, normalizes, enriches and analyzes
-> market news using financial NLP, entity intelligence, analytical SQL
-> and Power BI.
+**Documentation-first financial analytics platform for transforming unstructured market news into structured, explainable and interactive intelligence.**
 
-------------------------------------------------------------------------
+[📖 Documentation](#-documentation-hub) ·
+[🏗️ Architecture](#%EF%B8%8F-system-architecture) ·
+[🧠 AI/ML](#-ai--ml-methodology) ·
+[📊 Power BI](#-power-bi-decision-intelligence) ·
+[💡 Business Insights](#-business-insights)
 
-## 🚀 Executive Summary
+</div>
 
-The **AI Stock Sentiment Engine** transforms fragmented financial news
-into structured market intelligence for Indian equities.
+---
 
-The project combines:
+## 📌 Executive Summary
 
-**Multi-source news ingestion → normalization → deduplication →
-entity/ticker intelligence → sector & theme classification → VADER +
-FinBERT → sentiment fusion → confidence & model agreement → PostgreSQL →
-analytical SQL → Power BI**
+> **The problem:** Financial news is fragmented, repetitive, inconsistent and difficult to translate into comparable signals.
+>
+> **The solution:** An end-to-end analytics pipeline that ingests, normalizes, deduplicates, enriches and scores financial news using entity intelligence, sector/theme classification, VADER and FinBERT.
+>
+> **The outcome:** PostgreSQL-backed analytical datasets and Power BI dashboards that allow analysts to move from market-level signals to stock- and article-level evidence.
 
-The goal is **decision support and market intelligence**, not direct
-stock-price prediction or automated trading.
+### 🔎 At a Glance
 
-### Business problem
+| Dimension | Project Capability |
+|---|---|
+| **Domain** | Financial Markets / Indian Equities |
+| **Primary use case** | Financial-news intelligence & decision support |
+| **NLP** | VADER + FinBERT |
+| **Data platform** | PostgreSQL |
+| **Analytics** | SQL / CTEs / aggregations / window functions |
+| **BI** | Power BI |
+| **Entity intelligence** | Stock / company / index / commodity / entity type |
+| **Classification** | Sector + market themes + relevance |
+| **Uncertainty** | Confidence + model agreement/disagreement |
+| **Portfolio scope** | Documentation-first public repository |
+| **Trading execution** | Out of scope |
+| **Direct stock-price prediction** | Out of scope |
 
-Financial news is:
+> **Important:** This project is designed for **analytics and decision support**, not automated trading or guaranteed stock-price forecasting.
 
--   distributed across multiple sources;
--   repetitive and difficult to consolidate;
--   rich in company, sector and market context;
--   inconsistent in format and content depth;
--   difficult to translate into comparable analytical signals.
+---
 
-This project creates a repeatable pipeline that turns unstructured news
-into:
+# 🧭 Table of Contents
 
--   article-level sentiment;
--   stock/ticker intelligence;
--   sector intelligence;
--   market themes;
--   confidence and model-agreement signals;
--   BI-ready analytical datasets.
+<details>
+<summary><b>Open navigation</b></summary>
 
-------------------------------------------------------------------------
+- [Executive Summary](#-executive-summary)
+- [Business Problem](#-business-problem)
+- [What This Project Demonstrates](#-what-this-project-demonstrates)
+- [System Architecture](#%EF%B8%8F-system-architecture)
+- [End-to-End Data Flow](#-end-to-end-data-flow)
+- [Data Acquisition](#-data-acquisition)
+- [Entity & Sector Intelligence](#-entity--sector-intelligence)
+- [AI / ML Methodology](#-ai--ml-methodology)
+- [Data Model](#-data-model)
+- [Analytics Layer](#-analytics-layer)
+- [Power BI Decision Intelligence](#-power-bi-decision-intelligence)
+- [Business Insights](#-business-insights)
+- [Data Quality](#-data-quality)
+- [Data Science Manager Lens](#-data-science-manager-lens)
+- [Engineering Decisions](#-engineering-decisions)
+- [Validation](#-validation)
+- [Public Repository](#-public-repository)
+- [Documentation Hub](#-documentation-hub)
+- [Limitations](#%EF%B8%8F-limitations)
+- [Portfolio Positioning](#-portfolio-positioning)
 
-## 🎯 What the Project Demonstrates
+</details>
 
-  Capability                                   Demonstrated
-  -------------------------------------------- -----------------
-  Multi-source data ingestion                  ✅
-  Web/RSS/API-based collection                 ✅
-  Data normalization                           ✅
-  Deduplication                                ✅
-  Entity/ticker mapping                        ✅
-  Sector classification                        ✅
-  Theme classification                         ✅
-  Financial NLP                                ✅
-  FinBERT + VADER                              ✅
-  Weighted sentiment fusion                    ✅
-  Confidence & disagreement                    ✅
-  PostgreSQL persistence                       ✅
-  SQL analytics                                ✅
-  Power BI reporting                           ✅
-  Automated testing                            ✅
-  Production-oriented logging/retry concepts   ✅
-  Direct trading execution                     ❌ Out of scope
-  Stock-price prediction                       ❌ Out of scope
+---
 
-------------------------------------------------------------------------
+# 🎯 Business Problem
 
-## 🏗️ End-to-End Architecture
+Financial-news analytics looks simple until the data is examined closely.
 
-``` text
-                    FINANCIAL NEWS SOURCES
-                             │
-        ┌────────────────────┼────────────────────┐
-        │                    │                    │
-   Web Scrapers          RSS / Feeds          APIs / Reference
-        │                    │                    │
-        └────────────────────┼────────────────────┘
-                             ▼
-                  ┌──────────────────────┐
-                  │  NORMALIZATION       │
-                  │  + CLEANING          │
-                  └──────────┬───────────┘
-                             ▼
-                  ┌──────────────────────┐
-                  │ DEDUPLICATION        │
-                  └──────────┬───────────┘
-                             ▼
-             ┌─────────────────────────────────┐
-             │ ENTITY / TICKER INTELLIGENCE   │
-             │ Company • Ticker • Index •      │
-             │ Commodity • Entity Type        │
-             └───────────────┬─────────────────┘
-                             ▼
-             ┌─────────────────────────────────┐
-             │ SECTOR + THEME INTELLIGENCE    │
-             └───────────────┬─────────────────┘
-                             ▼
-             ┌─────────────────────────────────┐
-             │ FINANCIAL NLP                  │
-             │ VADER + FinBERT                │
-             └───────────────┬─────────────────┘
-                             ▼
-             ┌─────────────────────────────────┐
-             │ SENTIMENT FUSION                │
-             │ Confidence + Agreement         │
-             └───────────────┬─────────────────┘
-                             ▼
-                    ┌─────────────────┐
-                    │   PostgreSQL    │
-                    └────────┬────────┘
-                             ▼
-                    ┌─────────────────┐
-                    │ SQL Analytics    │
-                    │ + BI Views       │
-                    └────────┬────────┘
-                             ▼
-                    ┌─────────────────┐
-                    │    Power BI     │
-                    └─────────────────┘
+### The practical challenges
+
+- News arrives from multiple sources and formats.
+- The same story can appear multiple times.
+- Company names can be ambiguous.
+- A company mention does not automatically establish a sector.
+- Headlines may contain market context without company-specific relevance.
+- Sentiment models can disagree.
+- A single sentiment label can hide uncertainty.
+- Aggregate dashboard metrics need traceability back to article-level evidence.
+
+### The analytical response
+
+```text
+UNSTRUCTURED NEWS
+        ↓
+STANDARDIZE
+        ↓
+REMOVE DUPLICATES
+        ↓
+IDENTIFY ENTITIES
+        ↓
+CLASSIFY SECTOR / THEME / RELEVANCE
+        ↓
+APPLY FINANCIAL NLP
+        ↓
+FUSE MODEL SIGNALS
+        ↓
+PRESERVE CONFIDENCE + AGREEMENT
+        ↓
+STORE IN POSTGRESQL
+        ↓
+ANALYZE WITH SQL
+        ↓
+VISUALIZE IN POWER BI
+        ↓
+DECISION SUPPORT
 ```
 
-See [System Architecture](docs/architecture.md) for the detailed design.
+---
 
-------------------------------------------------------------------------
+# 📊 What This Project Demonstrates
 
-## 📰 Data Acquisition
+| Capability | Evidence in the Project |
+|---|---|
+| 🧲 Multi-source ingestion | Web / RSS / API-oriented collection strategies |
+| 🧹 Data engineering | Normalization and deduplication |
+| 🏷️ Entity intelligence | Company, ticker, index, commodity and entity types |
+| 🧭 Classification | Sector, theme and relevance |
+| 🧠 Financial NLP | VADER + FinBERT |
+| ⚖️ Model fusion | 0.35 × VADER + 0.65 × FinBERT |
+| 🎯 Uncertainty | Confidence + agreement/disagreement |
+| 🗄️ Data platform | PostgreSQL |
+| 📐 Analytics engineering | CTEs, aggregations, window functions and BI views |
+| 📊 BI | Power BI decision-intelligence dashboards |
+| 🧪 Validation | Automated/regression testing |
+| 🏛️ Architecture | Separation of ingestion, processing, persistence, analytics and presentation |
 
-The ingestion layer uses source-specific strategies rather than assuming
-every site can be collected in the same way.
+---
 
-  ---------------------------------------------------------------------
-  Source / Channel                   Acquisition approach
-  ---------------------------------- ----------------------------------
-  Moneycontrol                       Requests/HTML, JSON-LD and
-                                     source-specific extraction
+# 🏗️ System Architecture
 
-  Economic Times                     Requests + BeautifulSoup +
-                                     JSON-LD/HTML fallbacks
+```mermaid
+flowchart LR
+    A["📰 Financial News Sources"]
+    B["📥 Ingestion"]
+    C["🧹 Normalization"]
+    D["♻️ Deduplication"]
+    E["🏷️ Entity / Ticker Intelligence"]
+    F["🧭 Sector + Theme + Relevance"]
+    G["🧠 Financial NLP"]
+    H["⚖️ Sentiment Fusion"]
+    I["🎯 Confidence + Agreement"]
+    J[("🗄️ PostgreSQL")]
+    K["📐 Analytical SQL"]
+    L["📊 BI Views"]
+    M["📈 Power BI"]
 
-  Investing.com                      Browser-impersonated requests +
-                                     BeautifulSoup/JSON-LD
+    A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M
+```
 
-  Trendlyne                          Playwright/browser rendering +
-                                     BeautifulSoup
+### Architecture layers
 
-  LiveMint                           Requests + BeautifulSoup
+| Layer | Responsibility | Design Principle |
+|---|---|---|
+| **Ingestion** | Source-specific collection | Isolate source behavior |
+| **Processing** | Normalize + deduplicate | Consistent analytical records |
+| **Entity Intelligence** | Map entities/tickers | Avoid uncontrolled propagation |
+| **Context Intelligence** | Sector/theme/relevance | Add business meaning |
+| **Financial NLP** | VADER + FinBERT | Complementary signals |
+| **Persistence** | PostgreSQL | Durable analytical storage |
+| **Analytics** | SQL | Reusable metrics and BI views |
+| **Presentation** | Power BI | Decision-oriented consumption |
 
-  Reuters discovery                  Google News RSS + Reuters
-                                     filtering
+➡️ **Deep dive:** [System Architecture](docs/System_Architecture.md)
 
-  Reddit                             JSON-based endpoint where
-                                     applicable
+---
 
-  NSE reference data                 NSE reference/ticker data
+# 🔄 End-to-End Data Flow
 
-  Twitter/X                          Mock/source placeholder in the
-                                     current implementation
-  ---------------------------------------------------------------------
+### 01 — Ingest
 
-> Source availability and extraction behavior can change. The project
-> intentionally isolates source-specific logic so individual collectors
-> can evolve independently.
+Collect financial-news records through source-specific acquisition strategies.
 
-------------------------------------------------------------------------
+### 02 — Normalize
 
-## 🧹 Data Processing
+Create a common article representation and standardize fields.
 
-The processing layer creates a common article representation and
-applies:
+### 03 — Deduplicate
 
-1.  text normalization;
-2.  URL/headline-based deduplication;
-3.  financial text preparation;
-4.  entity/ticker mapping;
-5.  sector classification;
-6.  theme classification;
-7.  relevance and quality checks.
+Reduce repeated stories using URL/headline-oriented logic.
 
-### Conservative classification
+### 04 — Enrich
 
-Ticker mapping and sector classification are intentionally separate.
+Add:
 
-``` text
+- ticker / entity information
+- entity type
+- sector
+- theme
+- relevance / quality context
+
+### 05 — Score
+
+Apply VADER and FinBERT and preserve component-level outputs.
+
+### 06 — Persist
+
+Store enriched records and operational metadata in PostgreSQL.
+
+### 07 — Analyze
+
+Build reusable analytical SQL and BI-oriented views.
+
+### 08 — Visualize
+
+Expose market, sector, stock and ticker intelligence through Power BI.
+
+➡️ **Deep dive:** [Data Pipeline](docs/Data_Pipeline.md)
+
+---
+
+# 📰 Data Acquisition
+
+The ingestion layer intentionally uses source-specific strategies rather than treating every publisher as identical.
+
+| Source / Channel | Acquisition Approach |
+|---|---|
+| **Moneycontrol** | Requests / HTML, JSON-LD and source-specific extraction |
+| **Economic Times** | Requests + BeautifulSoup + JSON-LD / HTML fallbacks |
+| **Investing.com** | Browser-impersonated requests + BeautifulSoup / JSON-LD |
+| **Trendlyne** | Playwright / browser rendering + BeautifulSoup |
+| **LiveMint** | Requests + BeautifulSoup |
+| **Reuters discovery** | Google News RSS + Reuters filtering |
+| **Reddit** | JSON-based endpoint where applicable |
+| **NSE reference data** | NSE reference / ticker data |
+| **Twitter/X** | Mock / source placeholder in current implementation |
+
+<details>
+<summary><b>Why source-specific collectors?</b></summary>
+
+Financial websites differ in HTML structure, rendering behavior, metadata availability and access patterns.
+
+Isolating source-specific logic makes individual collectors easier to maintain without forcing the entire ingestion layer to change.
+
+</details>
+
+---
+
+# 🏷️ Entity & Sector Intelligence
+
+## Entity intelligence
+
+Supported entity categories include:
+
+```text
+LISTED_STOCK
+SUBSIDIARY
+PRIVATE_COMPANY
+IPO_CANDIDATE
+INDEX
+COMMODITY
+UNKNOWN
+```
+
+## Sector classification is intentionally independent
+
+```text
 Ticker Mapping
       ≠
 Sector Classification
 ```
 
-When sector evidence is weak, the pipeline can retain:
+A weak ticker match should not automatically determine the sector.
 
-``` text
+When evidence is insufficient:
+
+```text
 Sector = Unclassified
 ```
 
-rather than forcing a potentially incorrect label.
+That is treated as a **data-quality safeguard**, not a failure.
 
-------------------------------------------------------------------------
+---
 
-## 🧠 Financial NLP
+# 🧠 AI / ML Methodology
 
-Two complementary sentiment models are retained.
+## Financial NLP stack
 
-  Model                          Role
-  ------------------------------ ---------------------------------------
-  **VADER**                      Lexicon/rule-based sentiment signal
-  **FinBERT**                    Finance-domain transformer sentiment
-  **Fusion**                     Weighted combination of model outputs
-  **Confidence**                 Model certainty signal
-  **Agreement / Disagreement**   Model consistency signal
+```text
+                 ARTICLE TEXT
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+       VADER                 FinBERT
+          │                     │
+          └──────────┬──────────┘
+                     ↓
+             WEIGHTED FUSION
+                     ↓
+          CONFIDENCE + AGREEMENT
+                     ↓
+             FINAL SENTIMENT
+```
 
-The current documented fusion is:
+### Model roles
 
-``` text
+| Component | Purpose |
+|---|---|
+| **VADER** | Lightweight lexicon/rule-based sentiment |
+| **FinBERT** | Finance-domain transformer sentiment |
+| **Fusion** | Weighted combination |
+| **Confidence** | Model certainty signal |
+| **Agreement** | Model consistency signal |
+
+### Current documented fusion
+
+```text
 Ensemble Score
-    =
+      =
 0.35 × VADER
-+
+      +
 0.65 × FinBERT
 ```
 
-This is a **weighted fusion strategy**, not a separately trained
-ensemble model.
+> This is a **weighted fusion strategy**, not a separately trained ensemble model.
 
-### Why retain both models?
+### Why model agreement matters
 
-A single sentiment score can hide uncertainty. Keeping the component
-outputs makes it possible to distinguish:
+These two outputs are not analytically equivalent:
 
-``` text
-Positive + high confidence + strong agreement
+```text
+Positive
++ High Confidence
++ Strong Agreement
 ```
 
-from:
+versus:
 
-``` text
-Positive + lower confidence + model disagreement
+```text
+Positive
++ Lower Confidence
++ Model Disagreement
 ```
 
-That makes the output more useful for analytical decision support.
+Preserving both cases makes uncertainty visible to downstream analytics.
 
-See [ML & Sentiment Methodology](docs/ml_methodology.md).
+➡️ **Deep dive:** [AI/ML Methodology](docs/AI_ML_Methodology.md)
 
-------------------------------------------------------------------------
+---
 
-## 🗄️ Data & Analytics Layer
+# 🗄️ Data Model
 
-The enriched data is persisted in PostgreSQL and exposed through an
-analytical SQL layer.
+The analytical persistence layer is centered on PostgreSQL.
 
-### Core analytical domains
+### Core domains
 
--   articles;
--   sentiment results;
--   stock/reference data;
--   article/entity relationships;
--   scrape-run and pipeline metadata;
--   reporting views.
+| Domain | Purpose |
+|---|---|
+| `news_articles` | Normalized articles and article-level intelligence |
+| `sentiment_results` | VADER, FinBERT, ensemble, confidence and agreement |
+| `stock_master` | Market entity / reference data |
+| `article_entities` | Article-to-entity relationships |
+| `scrape_runs` | Operational pipeline metadata |
 
-### SQL techniques
+### Conceptual relationship
 
-The project uses analytical SQL patterns including:
+```mermaid
+erDiagram
+    NEWS_ARTICLES ||--o{ SENTIMENT_RESULTS : produces
+    NEWS_ARTICLES ||--o{ ARTICLE_ENTITIES : contains
+    STOCK_MASTER ||--o{ ARTICLE_ENTITIES : maps
+    SCRAPE_RUNS ||--o{ NEWS_ARTICLES : creates
+```
 
--   CTEs;
--   aggregations;
--   window functions;
--   sector analysis;
--   model disagreement analysis;
--   stock intelligence;
--   BI-oriented reporting views.
+➡️ **Deep dive:** [Data Model](docs/Data_Model.md)
 
-See [Data Pipeline](docs/data_pipeline.md).
+---
 
-------------------------------------------------------------------------
+# 📐 Analytics Layer
 
-## 📊 Power BI Intelligence Layer
+The SQL layer converts persisted records into reusable analytical outputs.
 
-The Power BI layer converts the analytical views into recruiter-friendly
-business intelligence.
+### Analytical techniques
 
-### Current dashboard concepts
+- CTEs
+- aggregations
+- window functions
+- sector analysis
+- model disagreement analysis
+- stock intelligence
+- BI-oriented reporting views
 
-#### 01 --- AI Market Intelligence
+### Analytical grain
 
-Executive-level view of:
+```text
+Market
+   ↓
+Sector
+   ↓
+Stock / Ticker
+   ↓
+Article
+   ↓
+Model Output
+```
 
--   market sentiment;
--   article/news activity;
--   sector sentiment;
--   stock rankings;
--   market themes.
+This allows the dashboard to move from **high-level signal → underlying evidence**.
 
-#### 02 --- Stock Sentiment & Themes
+➡️ [Analytics Methodology](docs/Analytics_Methodology.md)
 
-Focused on:
+---
 
--   overall stock sentiment ranking;
--   top positive stocks;
--   top negative stocks;
--   market themes by news volume;
--   sector intelligence.
+# 📈 Power BI Decision Intelligence
 
-#### 03 --- Ticker Deep Dive / Stock Intelligence
+The dashboard is designed around a decision journey rather than a collection of disconnected charts.
 
-A selected ticker can be investigated through:
+## 01 · AI Market Intelligence
 
--   ticker filter;
--   average sentiment;
--   confidence;
--   article/mention counts;
--   stock intelligence detail.
+**Executive view**
 
-> The dashboard is an analytical portfolio artifact. It is not a live
-> trading terminal.
+- market sentiment
+- article activity
+- sector sentiment
+- stock rankings
+- market themes
 
-See [Power BI Dashboard Guide](docs/powerbi_guide.md).
+## 02 · Stock Sentiment & Themes
 
-### Portfolio Dashboard Evidence
+**Comparative view**
 
-The public repository includes working dashboard screenshots:
+- overall stock sentiment
+- top positive stocks
+- top negative stocks
+- market themes
+- sector intelligence
 
-  -------------------------------------------------------------------------------------------------
-  View                                Screenshot
-  ----------------------------------- -------------------------------------------------------------
-  Sector Intelligence                 [Open
-                                      screenshot](screenshots/powerbi/sector_intelligence.png)
+## 03 · Ticker Deep Dive
 
-  Stock Sentiment & Themes            [Open
-                                      screenshot](screenshots/powerbi/stock_sentiment_themes.png)
+**Diagnostic view**
 
-  Ticker Deep Dive                    [Open screenshot](screenshots/powerbi/ticker_deep_dive.png)
-  -------------------------------------------------------------------------------------------------
+- ticker filter
+- average sentiment
+- confidence
+- article / mention counts
+- stock intelligence detail
 
-These are portfolio evidence from the working dashboard; future
-screenshots can replace them as the report is visually refined.
+> The dashboard is a portfolio analytics artifact and **not a live trading terminal**.
 
-------------------------------------------------------------------------
+### Dashboard evidence
 
-## 📈 Example Analytical Questions
+<div align="center">
 
-The platform is designed to answer questions such as:
+### Executive Market Intelligence
 
-### Market
+<img src="screenshots/powerbi/executive_overview.png" alt="Executive Market Intelligence" width="92%">
 
--   What is the current distribution of positive, neutral and negative
-    news?
--   Which sectors have the strongest sentiment?
--   Which themes are generating the most coverage?
+### Sector Intelligence
 
-### Stock
+<img src="screenshots/powerbi/sector_intelligence.png" alt="Sector Intelligence" width="92%">
 
--   Which stocks have the strongest news sentiment?
--   Which stocks are receiving unusually high news attention?
--   Does a stock's sentiment agree with the model confidence?
+### Stock Sentiment & Themes
 
-### Model
+<img src="screenshots/powerbi/stock_sentiment_themes.png" alt="Stock Sentiment and Themes" width="92%">
 
--   Where do VADER and FinBERT disagree?
--   Which articles have lower-confidence sentiment?
--   How does model agreement change the interpretation of an article?
+### Ticker Deep Dive
 
-### BI
+<img src="screenshots/powerbi/ticker_deep_dive.png" alt="Ticker Deep Dive" width="92%">
 
--   Can aggregate insights be traced back to article-level evidence?
--   Can a recruiter/interviewer explore the result interactively by
-    ticker or sector?
+</div>
 
-------------------------------------------------------------------------
+➡️ **Dashboard documentation:** [Dashboard Guide](docs/Dashboard_Guide.md)
 
-## 🧪 Validation
+---
 
-The project includes automated tests for important pipeline components.
+# 💡 Business Insights
+
+The platform is designed to support questions across four analytical levels.
+
+<details>
+<summary><b>🌐 Market Intelligence</b></summary>
+
+- What is the distribution of positive, neutral and negative news?
+- Which sectors have the strongest sentiment?
+- Which themes are generating the most coverage?
+
+</details>
+
+<details>
+<summary><b>🏢 Stock Intelligence</b></summary>
+
+- Which stocks have the strongest news sentiment?
+- Which stocks are receiving unusually high news attention?
+- Does sentiment agree with model confidence?
+
+</details>
+
+<details>
+<summary><b>🧠 Model Intelligence</b></summary>
+
+- Where do VADER and FinBERT disagree?
+- Which articles have lower-confidence sentiment?
+- How does model agreement change interpretation?
+
+</details>
+
+<details>
+<summary><b>📊 BI Traceability</b></summary>
+
+- Can aggregate insights be traced back to article-level evidence?
+- Can an analyst explore results interactively by ticker or sector?
+
+</details>
+
+➡️ **Business interpretation:** [Business Insights](docs/Business_Insights.md)
+
+---
+
+# 👩‍💼 Data Science Manager Lens
+
+This section intentionally highlights **leadership-level analytical thinking**, not only implementation.
+
+| Managerial Dimension | Demonstrated Through |
+|---|---|
+| **Architecture** | End-to-end separation of ingestion, NLP, storage, analytics and BI |
+| **Data Quality** | Conservative sector/entity classification |
+| **Model Governance** | Confidence + agreement/disagreement |
+| **Explainability** | Retention of component model outputs |
+| **Product Thinking** | Dashboard organized around decision journeys |
+| **Analytics Strategy** | Market → sector → stock → article analytical grain |
+| **Engineering Trade-offs** | Source-specific collectors and modular layers |
+| **Business Translation** | Turning model outputs into decision-oriented metrics |
+| **Governance** | Public/private separation and controlled disclosure |
+
+---
+
+# 🧩 Engineering Decisions
+
+| Decision | Why |
+|---|---|
+| Separate ticker mapping from sector classification | Prevents uncertain entity matches from contaminating sector intelligence |
+| Preserve `Unclassified` | Avoids false precision |
+| Retain VADER + FinBERT outputs | Enables model-level comparison |
+| Track confidence + disagreement | Makes uncertainty visible |
+| Normalize before analytics | Improves consistency |
+| Deduplicate before aggregation | Prevents repeated stories from inflating metrics |
+| PostgreSQL → SQL → Power BI | Separates storage, analytics and presentation |
+| Source-specific collectors | Handles differences across acquisition channels |
+| Documentation-first public repository | Demonstrates architecture without exposing private implementation |
+
+---
+
+# 🧪 Validation
 
 A documented regression run included:
 
-``` text
+```text
 2 passed
 ```
 
-Validation also covered pipeline execution, scraper behavior and
-reporting-oriented outputs during development.
+Validation also covered pipeline execution, scraper behavior and reporting-oriented outputs during development.
 
-------------------------------------------------------------------------
+<details>
+<summary><b>Validation philosophy</b></summary>
 
-## 📁 Public Repository Structure
+The project treats validation as more than a model metric. Data ingestion, processing behavior, persistence and reporting outputs are all part of the analytical product.
 
-The recommended public repository is intentionally
-**documentation-first**.
+</details>
 
-``` text
+---
+
+# 🔐 Public vs Private
+
+### Public portfolio
+
+- architecture
+- data pipeline documentation
+- AI/ML methodology
+- analytics methodology
+- data model
+- Power BI evidence
+- business insights
+- engineering decisions
+- sample / synthetic data
+- interview guide
+
+### Keep private
+
+- credentials
+- API keys / tokens
+- `.env`
+- private raw datasets
+- private database dumps
+- proprietary implementation source
+- private configuration
+- local environments
+
+➡️ [Deployment Guide](docs/Deployment_Guide.md)
+
+---
+
+# 📁 Public Repository Structure
+
+```text
 AI-Stock-Sentiment-Analytics/
 │
 ├── README.md
 │
 ├── docs/
-│   ├── project_overview.md
-│   ├── architecture.md
-│   ├── data_pipeline.md
-│   ├── ml_methodology.md
-│   ├── data_quality.md
-│   ├── powerbi_guide.md
-│   ├── business_insights.md
-│   ├── interview_guide.md
-│   └── public_release_checklist.md
-│
-├── architecture/
+│   ├── AI_ML_Methodology.md
+│   ├── Analytics_Methodology.md
+│   ├── Business_Insights.md
+│   ├── Dashboard_Guide.md
+│   ├── Data_Model.md
+│   ├── Data_Pipeline.md
+│   ├── Data_Quality.md
+│   ├── Deployment_Guide.md
+│   ├── Interview_Guide.md
+│   ├── Project_Overview.md
+│   ├── System_Architecture.md
 │   └── README.md
 │
+├── architecture/
 ├── screenshots/
-│   ├── powerbi/
-│   ├── architecture/
-│   └── samples/
+│   └── powerbi/
+│       ├── executive_overview.png
+│       ├── sector_intelligence.png
+│       ├── stock_sentiment_themes.png
+│       └── ticker_deep_dive.png
 │
 └── sample_data/
-    └── README.md
 ```
 
-The implementation repository can remain private.
+---
 
-------------------------------------------------------------------------
+# ⚠️ Limitations
 
-## 🔐 Public vs Private
+- Financial-news coverage is not the complete information set of a market.
+- Source HTML / RSS / API behavior can change.
+- Some sources provide limited article text.
+- Entity names can be ambiguous.
+- Sector classification can remain uncertain.
+- Sentiment quality depends on the text available to the models.
+- Sentiment should not be interpreted as a guaranteed stock-price forecast.
+- The project does not execute trades.
 
-### Public
+---
 
--   architecture;
--   data-flow documentation;
--   analytical methodology;
--   Power BI screenshots;
--   database/analytics design;
--   engineering decisions;
--   sample or synthetic data;
--   interview guide.
+# 📚 Documentation Hub
 
-### Keep private
+| Category | Resource |
+|---|---|
+| 🎯 **Project** | [Project Overview](docs/Project_Overview.md) |
+| 🏗️ **Architecture** | [System Architecture](docs/System_Architecture.md) |
+| 🔄 **Data Engineering** | [Data Pipeline](docs/Data_Pipeline.md) |
+| 🧠 **AI / ML** | [AI/ML Methodology](docs/AI_ML_Methodology.md) |
+| 📐 **Analytics** | [Analytics Methodology](docs/Analytics_Methodology.md) |
+| 🗄️ **Data Model** | [Data Model](docs/Data_Model.md) |
+| ✅ **Data Quality** | [Data Quality](docs/Data_Quality.md) |
+| 📊 **BI** | [Dashboard Guide](docs/Dashboard_Guide.md) |
+| 💡 **Business** | [Business Insights](docs/Business_Insights.md) |
+| 🚀 **Deployment** | [Deployment Guide](docs/Deployment_Guide.md) |
+| 🎯 **Interview** | [Interview Guide](docs/Interview_Guide.md) |
 
--   credentials;
--   API keys/tokens;
--   `.env`;
--   private raw datasets;
--   private database dumps;
--   proprietary source code;
--   private configuration;
--   local environments.
+---
 
-------------------------------------------------------------------------
+# 🏁 Portfolio Positioning
 
-## 🧩 Engineering Decisions
+This project demonstrates the ability to connect:
 
-  ---------------------------------------------------------------------
-  Decision                           Reason
-  ---------------------------------- ----------------------------------
-  Separate ticker mapping from       Reduces propagation of uncertain
-  sector classification              entity mappings
+**Data Engineering + Data Science + Financial NLP + Machine Learning + SQL + Business Intelligence + Software Engineering**
 
-  Preserve `Unclassified`            Makes uncertainty visible rather
-                                     than forcing labels
+The central story is:
 
-  Retain VADER and FinBERT outputs   Enables model-level comparison
+> ### **Not just a sentiment model.**
+>
+> **An end-to-end analytics product that converts unstructured financial information into structured, explainable and decision-ready intelligence.**
 
-  Track confidence and disagreement  Adds uncertainty/context to
-                                     sentiment
+---
 
-  Normalize before analytics         Improves consistency across
-                                     sources
+<div align="center">
 
-  Deduplicate before aggregation     Prevents repeated stories from
-                                     inflating news metrics
+## 📈 AI Stock Sentiment Analytics
 
-  PostgreSQL → SQL → Power BI        Separates storage, analytics and
-                                     presentation
+**Unstructured Data → Engineered Intelligence → Analytical Insight → Business Decision**
 
-  Source-specific collectors         Makes ingestion resilient to
-                                     source differences
-
-  Documentation-first public repo    Demonstrates architecture without
-                                     exposing private implementation
-  ---------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-## ⚠️ Limitations
-
--   Financial-news coverage is not the complete information set of a
-    market.
--   Source HTML/RSS/API behavior can change.
--   Some sources provide limited article text.
--   Entity names can be ambiguous.
--   Sector classification can remain uncertain.
--   Sentiment quality depends on the text available to the models.
--   Sentiment should not be interpreted as a guaranteed stock-price
-    forecast.
--   The project does not execute trades.
-
-------------------------------------------------------------------------
-
-## 📚 Documentation
-
--   [Project Overview](docs/project_overview.md)
--   [System Architecture](docs/architecture.md)
--   [Data Pipeline](docs/data_pipeline.md)
--   [ML & Sentiment Methodology](docs/ml_methodology.md)
--   [Data Quality](docs/data_quality.md)
--   [Power BI Dashboard Guide](docs/powerbi_guide.md)
--   [Business Insights](docs/business_insights.md)
--   [Interview Guide](docs/interview_guide.md)
--   [Public Release Checklist](docs/public_release_checklist.md)
-
-------------------------------------------------------------------------
-
-## 🏁 Portfolio Positioning
-
-This project demonstrates a combination of:
-
-**Data Engineering + Data Science + Financial NLP + Machine Learning +
-SQL + Business Intelligence + Software Engineering**
-
-It is designed to show not only how a model produces a score, but how an
-analytics product can move from:
-
-> **unstructured data → engineered features → ML/NLP → analytical
-> storage → business intelligence → decision support**
-
-------------------------------------------------------------------------
-
-<p align="center">
-<strong>AI Stock Sentiment
-Engine</strong><br> Turning Financial News into
-Structured Market Intelligence
-
-</p>
+</div>
