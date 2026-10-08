@@ -28,12 +28,33 @@
 
 ## 📌 Executive Summary
 
-> **The problem:** Financial news is fragmented, repetitive, inconsistent and difficult to translate into comparable signals.
->
-> **The solution:** An end-to-end analytics pipeline that ingests, normalizes, deduplicates, enriches and scores financial news using entity intelligence, sector/theme classification, VADER and FinBERT.
->
-> **The outcome:** PostgreSQL-backed analytical datasets and Power BI dashboards that allow analysts to move from market-level signals to stock- and article-level evidence.
 
+> **Turning unstructured financial news into structured, explainable market intelligence.**
+
+| 🔴 BUSINESS CHALLENGE | 🟣 AI-DRIVEN SOLUTION | 🟢 BUSINESS OUTCOME |
+|---|---|---|
+| Financial news is fragmented, repetitive and difficult to compare across companies, sectors and themes. | An end-to-end pipeline combines entity intelligence, sector/theme classification, VADER + FinBERT sentiment, confidence and model agreement. | Analysts can move from **market → sector → stock → article** and trace insights back to the underlying evidence. |
+
+### 🚀 What makes this project different
+
+**Not just a sentiment model.**
+
+This project connects:
+
+`DATA ENGINEERING` → `FINANCIAL NLP` → `MACHINE LEARNING` → `SQL ANALYTICS` → `POWER BI` → `DECISION INTELLIGENCE`
+
+### 📊 At a Glance
+
+| Dimension | Capability |
+|---|---|
+| **Domain** | Financial Markets / Indian Equities |
+| **NLP** | VADER + FinBERT |
+| **Data Platform** | PostgreSQL |
+| **Analytics** | SQL / CTEs / Aggregations / Window Functions |
+| **BI** | Power BI |
+| **Entity Intelligence** | Stock / Company / Index / Commodity |
+| **Classification** | Sector + Market Themes + Relevance |
+| **Uncertainty** | Confidence + Model Agreement |
 ### 🔎 At a Glance
 
 | Dimension | Project Capability |
