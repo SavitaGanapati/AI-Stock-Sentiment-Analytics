@@ -149,26 +149,45 @@ DECISION SUPPORT
 
 ---
 
-# 🏗️ System Architecture
+# 🏗️ End-to-End Data & AI Architecture
+
+The platform follows a layered architecture that separates data acquisition, AI-driven market intelligence, and downstream analytics and decision intelligence.
 
 ```mermaid
-flowchart LR
-    A["📰 Financial News Sources"]
-    B["📥 Ingestion"]
-    C["🧹 Normalization"]
-    D["♻️ Deduplication"]
-    E["🏷️ Entity / Ticker Intelligence"]
-    F["🧭 Sector + Theme + Relevance"]
-    G["🧠 Financial NLP"]
-    H["⚖️ Sentiment Fusion"]
-    I["🎯 Confidence + Agreement"]
-    J[("🗄️ PostgreSQL")]
-    K["📐 Analytical SQL"]
-    L["📊 BI Views"]
-    M["📈 Power BI"]
+flowchart TB
 
-    A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M
+    subgraph DATA["DATA ACQUISITION AND PREPARATION"]
+        A[Financial News Sources]
+        B[Ingestion]
+        C[Normalization]
+        D[Deduplication]
+
+        A --> B --> C --> D
+    end
+
+    subgraph INTELLIGENCE["AI AND MARKET INTELLIGENCE"]
+        E[Entity and Ticker Intelligence]
+        F[Sector Theme and Relevance]
+        G[Financial NLP]
+        H[Sentiment Fusion]
+        I[Confidence and Model Agreement]
+
+        E --> F --> G --> H --> I
+    end
+
+    subgraph ANALYTICS["ANALYTICS AND DECISION INTELLIGENCE"]
+        J[(PostgreSQL)]
+        K[Analytical SQL]
+        L[BI Views]
+        M[Power BI]
+
+        J --> K --> L --> M
+    end
+
+    D --> E
+    I --> J
 ```
+
 
 ### Architecture layers
 
@@ -672,6 +691,28 @@ AI-Stock-Sentiment-Analytics/
 | 💡 **Business** | [Business Insights](docs/Business_Insights.md) |
 | 🚀 **Deployment** | [Deployment Guide](docs/Deployment_Guide.md) |
 | 🎯 **Interview** | [Interview Guide](docs/Interview_Guide.md) |
+
+---
+
+# 📚 References
+
+The project methodology and technology choices are informed by the following primary references:
+
+| Reference | Purpose |
+|---|---|
+| **FinBERT — Financial Sentiment Analysis with Pre-trained Language Models** | Finance-domain transformer model used for financial NLP sentiment analysis |
+| **VADER — Valence Aware Dictionary and sEntiment Reasoner** | Lexicon/rule-based sentiment component used alongside FinBERT |
+| **PostgreSQL Documentation** | Relational database and analytical persistence layer |
+| **Microsoft Power BI Documentation** | Business intelligence and interactive dashboard layer |
+| **Hugging Face Transformers Documentation** | Transformer model implementation and inference ecosystem |
+
+### Primary resources
+
+- FinBERT: https://arxiv.org/abs/1908.10063
+- VADER: https://github.com/cjhutto/vaderSentiment
+- PostgreSQL: https://www.postgresql.org/docs/
+- Microsoft Power BI: https://learn.microsoft.com/power-bi/
+- Hugging Face Transformers: https://huggingface.co/docs/transformers/
 
 ---
 
