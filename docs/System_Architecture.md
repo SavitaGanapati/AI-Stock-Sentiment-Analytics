@@ -32,7 +32,7 @@
 ┌──────────────────────────────────────────────────────────────┐
 │                    FINANCIAL NLP                             │
 │ VADER → sentiment signal                                     │
-│ FinBERT → finance-domain transformer signal                 │
+│ FinBERT → finance-domain transformer signal                  │
 │ Weighted fusion → ensemble score                             │
 └──────────────────────────────┬───────────────────────────────┘
                                ↓
@@ -43,12 +43,12 @@
                                ↓
 ┌──────────────────────────────────────────────────────────────┐
 │                      POSTGRESQL                              │
-│ Articles • sentiment • entities • reference data • runs     │
+│ Articles • sentiment • entities • reference data • runs      │
 └──────────────────────────────┬───────────────────────────────┘
                                ↓
 ┌──────────────────────────────────────────────────────────────┐
 │                  ANALYTICS / SQL                             │
-│ CTEs • aggregations • window functions • BI views           │
+│ CTEs • aggregations • window functions • BI views            │
 └──────────────────────────────┬───────────────────────────────┘
                                ↓
 ┌──────────────────────────────────────────────────────────────┐
