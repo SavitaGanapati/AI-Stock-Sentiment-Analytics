@@ -1,0 +1,39 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+*.env
+secrets/
+credentials/
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log
+
+# Large/local datasets
+*.csv
+*.parquet
+*.pkl
+*.pickle
+*.db
+*.sqlite
+
+# Private working files
+private/
+local/

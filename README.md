@@ -500,23 +500,47 @@ The dashboard is designed around a decision journey rather than a collection of 
 
 ### Dashboard evidence
 
+The screenshots below are organized by the questions each report is designed to answer. Place the supplied image files directly in the `screenshots/` folder using the filenames shown here.
+
 <div align="center">
 
 ### Executive Market Intelligence
 
-<img src="screenshots/powerbi/executive_overview.png" alt="Executive Market Intelligence" width="92%">
+A high-level view of news activity, sentiment, confidence and sector signals.
+
+<img src="screenshots/executive_overview.png" alt="Executive Market Intelligence dashboard" width="92%">
+
+### Overall AI Stock Sentiment — Dashboard Design
+
+A consolidated visual overview of the intended market-intelligence experience. Treat this as a design/reference image rather than evidence of a live interactive report.
+
+<img src="screenshots/Overall%20AI%20Stock%20Sentiment.png" alt="Overall AI Stock Sentiment dashboard design reference" width="92%">
 
 ### Sector Intelligence
 
-<img src="screenshots/powerbi/sector_intelligence.png" alt="Sector Intelligence" width="92%">
+Compares average sentiment across sectors to help identify relative sector-level signals.
+
+<img src="screenshots/sector_intelligence.png" alt="Sector Intelligence report" width="82%">
 
 ### Stock Sentiment & Themes
 
-<img src="screenshots/powerbi/stock_sentiment_themes.png" alt="Stock Sentiment and Themes" width="92%">
+Compares overall stock sentiment, positive and negative stock rankings, and leading market themes.
+
+<img src="screenshots/stock_sentiment_themes.png" alt="Stock Sentiment and Themes report" width="92%">
+
+<img src="screenshots/Stock%20Sentiment%20Theme.png" alt="Stock sentiment ranking and market themes report view" width="88%">
+
+### Model Sentiment Comparison
+
+Shows how VADER, FinBERT and the ensemble compare, alongside model disagreement levels.
+
+<img src="screenshots/Model_Sentiment_Comparision.png" alt="VADER, FinBERT and ensemble sentiment comparison with model disagreement" width="92%">
 
 ### Ticker Deep Dive
 
-<img src="screenshots/powerbi/ticker_deep_dive.png" alt="Ticker Deep Dive" width="92%">
+A ticker-filtered view of sentiment, confidence, article counts and stock-intelligence details.
+
+<img src="screenshots/ticker_deep_dive.png" alt="Ticker Deep Dive report" width="88%">
 
 </div>
 
@@ -673,11 +697,13 @@ AI-Stock-Sentiment-Analytics/
 │
 ├── architecture/
 ├── screenshots/
-│   └── powerbi/
-│       ├── executive_overview.png
-│       ├── sector_intelligence.png
-│       ├── stock_sentiment_themes.png
-│       └── ticker_deep_dive.png
+│   ├── executive_overview.png
+│   ├── Model_Sentiment_Comparision.png
+│   ├── Overall AI Stock Sentiment.png
+│   ├── sector_intelligence.png
+│   ├── Stock Sentiment Theme.png
+│   ├── stock_sentiment_themes.png
+│   └── ticker_deep_dive.png
 │
 └── sample_data/
 ```
